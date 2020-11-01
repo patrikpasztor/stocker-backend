@@ -1,4 +1,4 @@
-package thesis.stocker.entity;
+package thesis.stocker.DTO;
 
 import thesis.stocker.util.TransactionType;
 
@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "transactions")
-public class Transaction {
+public class TransactionDTO {
 
     @Id
     @GeneratedValue
@@ -17,7 +17,7 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private UserDTO user;
 
     public Long getId() {
         return id;
@@ -31,11 +31,11 @@ public class Transaction {
         this.type = type;
     }
 
-    public User getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 }

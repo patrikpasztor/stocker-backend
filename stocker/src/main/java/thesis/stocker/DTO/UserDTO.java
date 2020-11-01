@@ -1,4 +1,4 @@
-package thesis.stocker.entity;
+package thesis.stocker.DTO;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class UserDTO {
 
     @Id
     @GeneratedValue
@@ -16,7 +16,7 @@ public class User {
     private String name;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-    private List<Transaction> transactions = new ArrayList<>();
+    private List<TransactionDTO> transactions = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -30,11 +30,11 @@ public class User {
         this.name = name;
     }
 
-    public List<Transaction> getTransactions() {
+    public List<TransactionDTO> getTransactions() {
         return transactions;
     }
 
-    public void setTransactions(List<Transaction> transactions) {
+    public void setTransactions(List<TransactionDTO> transactions) {
         this.transactions = transactions;
     }
 }
