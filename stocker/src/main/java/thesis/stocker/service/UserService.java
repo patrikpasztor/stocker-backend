@@ -21,6 +21,7 @@ public class UserService  implements IUserService{
 
     @Override
     public boolean save(UserDTO userDTO) throws Exception {
+        userDAO.save(userDTO);
         return false;
     }
 

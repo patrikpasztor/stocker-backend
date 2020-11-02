@@ -15,8 +15,10 @@ public class UserDTO {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+/*
+    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL)
     private List<TransactionDTO> transactions = new ArrayList<>();
+*/
 
     public Long getId() {
         return id;
@@ -30,11 +32,11 @@ public class UserDTO {
         this.name = name;
     }
 
-    public List<TransactionDTO> getTransactions() {
-        return transactions;
-    }
-
-    public void setTransactions(List<TransactionDTO> transactions) {
-        this.transactions = transactions;
-    }
+//    public List<TransactionDTO> getTransactions() {
+//        return transactions;
+//    }
+//
+//    public void setTransactions(List<TransactionDTO> transactions) {
+//        this.transactions = transactions;
+//    }
 }
