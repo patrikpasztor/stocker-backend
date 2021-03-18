@@ -5,24 +5,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import thesis.stocker.DTO.UserDTO;
-import thesis.stocker.service.IUserService;
+import thesis.stocker.DTO.TransactionDTO;
+import thesis.stocker.service.ITransactionService;
 
 @RestController
-public class UserController {
+public class TransactionController {
 
     @Autowired
-    private IUserService userService;
+    private ITransactionService transactionService;
 
-    @GetMapping(path="/saveuser", consumes = "application/json")
-    public String saveUser(@RequestBody UserDTO user){
+    @GetMapping(path = "/transact")
+    public String transact(@RequestBody TransactionDTO transactionDTO) {
         try {
-            userService.save(user);
+            transactionService.transact(transactionDTO);
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
         }
-        return "start";
+        return "gotcha";
     }
 
 }

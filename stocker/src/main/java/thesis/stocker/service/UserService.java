@@ -13,6 +13,10 @@ public class UserService  implements IUserService{
     @Autowired
     IUserDAO userDAO;
 
+    public void createUser(String name) throws Exception {
+        UserDTO newUser = new UserDTO(name);
+        this.save(newUser);
+    }
 
     @Override
     public UserDTO fetchById(int id) {
