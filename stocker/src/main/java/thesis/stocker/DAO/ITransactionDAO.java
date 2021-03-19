@@ -1,7 +1,7 @@
 package thesis.stocker.DAO;
 
-import thesis.stocker.DTO.TransactionDTO;
+import thesis.stocker.model.Transaction;
 
 public interface ITransactionDAO {
-    public boolean save(TransactionDTO transactionDTO) throws Exception;
+    public boolean save(Transaction transaction) throws Exception;
 }

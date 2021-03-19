@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import thesis.stocker.DAO.IUserDAO;
 import thesis.stocker.DTO.UserDTO;
+import thesis.stocker.model.User;
 
 import java.util.List;
 
@@ -13,24 +14,28 @@ public class UserService  implements IUserService{
     @Autowired
     IUserDAO userDAO;
 
-    public void createUser(String name) throws Exception {
-        UserDTO newUser = new UserDTO(name);
-        this.save(newUser);
-    }
+    @Autowired
+    MapperService mapperService;
 
     @Override
-    public UserDTO fetchById(int id) {
+    public UserDTO findById(int id) {
         return null;
     }
 
     @Override
+    public User findByName(String name) {
+        return userDAO.findByName(name);
+    }
+
+    @Override
     public boolean save(UserDTO userDTO) throws Exception {
-        userDAO.save(userDTO);
+        User user = mapperService.dtoToUser(userDTO);
+        userDAO.save(user);
         return false;
     }
 
     @Override
-    public List<UserDTO> fetchUsers() throws Exception {
+    public List<UserDTO> findAll() throws Exception {
         return null;
     }
 }

@@ -15,9 +15,9 @@ public class UserController {
     private IUserService userService;
 
     @GetMapping(path="/saveuser", consumes = "application/json")
-    public String saveUser(@RequestBody UserDTO user){
+    public String saveUser(@RequestBody UserDTO userDTO){
         try {
-            userService.save(user);
+            userService.save(userDTO);
         } catch (Exception e) {
             e.printStackTrace();
             return "error";

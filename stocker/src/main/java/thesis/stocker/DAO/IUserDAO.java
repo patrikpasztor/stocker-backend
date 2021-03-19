@@ -1,7 +1,10 @@
 package thesis.stocker.DAO;
 
 import thesis.stocker.DTO.UserDTO;
+import thesis.stocker.model.User;
 
 public interface IUserDAO {
-    public boolean save(UserDTO userDTO) throws Exception;
+    boolean save(User user) throws Exception;
+
+    User findByName(String name);
 }

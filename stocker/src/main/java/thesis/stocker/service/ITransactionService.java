@@ -2,10 +2,14 @@ package thesis.stocker.service;
 
 import thesis.stocker.DTO.TransactionDTO;
 
+import java.util.List;
+
 public interface ITransactionService {
 
     TransactionDTO fetchById(int id);
 
-    boolean transact(TransactionDTO transaction) throws Exception;
+    boolean buy(TransactionDTO transaction) throws Exception;
+
+    boolean sell(TransactionDTO transaction) throws Exception;
 
 }

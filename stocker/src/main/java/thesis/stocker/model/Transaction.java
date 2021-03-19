@@ -15,7 +15,7 @@ public class Transaction {
     private String type;
 
     @Column(nullable = false)
-    private String symbol;
+    private String stock;
 
     @Column(nullable = false)
     private double amount;
@@ -44,12 +44,12 @@ public class Transaction {
         this.user = user;
     }
 
-    public String getSymbol() {
-        return symbol;
+    public String getStock() {
+        return stock;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
+    public void setStock(String stock) {
+        this.stock = stock;
     }
 
     public double getAmount() {
