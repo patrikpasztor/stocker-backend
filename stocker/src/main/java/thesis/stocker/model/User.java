@@ -1,9 +1,7 @@
 package thesis.stocker.model;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @Entity
 @Table(name = "user")
@@ -11,7 +9,7 @@ public class User {
 
     @Id
     @GeneratedValue
-    private UUID id;
+    private Long id;
 
     @Column(nullable = false, length = 100)
     private String name;
@@ -32,7 +30,7 @@ public class User {
         this.name = name;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
@@ -58,6 +56,10 @@ public class User {
 
     public void setStockAmountMap(Map<String, Double> stockAmountMap) {
         this.stockAmountMap = stockAmountMap;
+    }
+
+    public void setStockAmount(String stock, Double newAmount) {
+        this.stockAmountMap.put(stock, newAmount);
     }
 
 }

@@ -7,4 +7,6 @@ public interface IUserDAO {
     boolean save(User user) throws Exception;
 
     User findByName(String name);
+
+    Double getStockAmount(String name, String stock);
 }

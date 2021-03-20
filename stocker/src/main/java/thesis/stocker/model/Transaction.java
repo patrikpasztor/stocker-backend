@@ -1,7 +1,6 @@
 package thesis.stocker.model;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Table(name = "transaction")
@@ -9,7 +8,7 @@ public class Transaction {
 
     @Id
     @GeneratedValue
-    private UUID id;
+    private Long id;
 
     @Column(nullable = false)
     private String type;
@@ -24,7 +23,7 @@ public class Transaction {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 

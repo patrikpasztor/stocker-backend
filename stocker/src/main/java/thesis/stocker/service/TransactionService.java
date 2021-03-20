@@ -14,7 +14,10 @@ public class TransactionService implements ITransactionService {
     ITransactionDAO transactionDAO;
 
     @Autowired
-    private MapperService mapperService;
+    MapperService mapperService;
+
+    @Autowired
+    IUserService userService;
 
     @Override
     public TransactionDTO fetchById(int id) {
@@ -26,11 +29,20 @@ public class TransactionService implements ITransactionService {
         Transaction transaction = mapperService.dtoToTransaction(transactionDTO);
         transaction.setType("buy");
         transactionDAO.save(transaction);
+
+        userService.updateBuy(transactionDTO);
+
         return false;
     }
 
     @Override
-    public boolean sell(TransactionDTO transaction) throws Exception {
+    public boolean sell(TransactionDTO transactionDTO) throws Exception {
+        Transaction transaction = mapperService.dtoToTransaction(transactionDTO);
+        transaction.setType("sell");
+        transactionDAO.save(transaction);
+
+        userService.updateSell(transactionDTO);
+
         return false;
     }
 }
