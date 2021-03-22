@@ -8,6 +8,7 @@ import thesis.stocker.DTO.UserDTO;
 import thesis.stocker.model.User;
 
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class UserService  implements IUserService{
@@ -81,4 +82,11 @@ public class UserService  implements IUserService{
     public Double getStockAmount(String name, String stock) {
         return userDAO.getStockAmount(name, stock);
     }
+
+    @Override
+    public Map<String, Double> listOwnedStocks(String username) {
+        User user= userDAO.findByName(username);
+        return user.getStockAmountMap();
+    }
+
 }

@@ -1,7 +1,10 @@
 package thesis.stocker.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import thesis.stocker.DTO.UserDTO;
@@ -51,6 +54,17 @@ public class UserController {
             e.printStackTrace();
             return "error";
         }
+    }
+
+    @GetMapping(path="/listStocks/{user}", produces="application/json")
+    public ResponseEntity<Map<String, Double>> listOwnedStocks(@PathVariable String user) {
+        try{
+            return new ResponseEntity<>(userService.listOwnedStocks(user), HttpStatus.OK) ;
+        } catch(Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+
     }
 
 }

@@ -5,6 +5,7 @@ import thesis.stocker.DTO.UserDTO;
 import thesis.stocker.model.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IUserService {
 
@@ -21,5 +22,7 @@ public interface IUserService {
     boolean updateSell(TransactionDTO transactionDTO);
 
     Double getStockAmount(String name, String stock);
+
+    Map<String, Double> listOwnedStocks(String user);
 
 }
