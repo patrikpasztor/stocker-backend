@@ -3,10 +3,13 @@ package thesis.stocker.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import thesis.stocker.DAO.IUserDAO;
+import thesis.stocker.DTO.StockDTO;
 import thesis.stocker.DTO.TransactionDTO;
 import thesis.stocker.DTO.UserDTO;
 import thesis.stocker.model.User;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -84,9 +87,19 @@ public class UserService  implements IUserService{
     }
 
     @Override
-    public Map<String, Double> listOwnedStocks(String username) {
-        User user= userDAO.findByName(username);
-        return user.getStockAmountMap();
+    public List<StockDTO> listOwnedStocks(String username) {
+        try{
+            User user= userDAO.findByName(username);
+            Map<String,Double> ownedMap = user.getStockAmountMap();
+            List<StockDTO> ownedList = new ArrayList<>();
+            for(Map.Entry<String,Double> entry : ownedMap.entrySet()) {
+                ownedList.add(new StockDTO(entry.getKey(), entry.getValue()));
+            }
+            return ownedList;
+        } catch(NullPointerException e){
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
     }
 
 }

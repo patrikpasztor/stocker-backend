@@ -16,6 +16,9 @@ public class Transaction {
     @Column(nullable = false)
     private String stock;
 
+    @Column(name = "stock_price" ,nullable = false)
+    private double stockPrice;
+
     @Column(nullable = false)
     private double amount;
 
@@ -57,5 +60,13 @@ public class Transaction {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public double getStockPrice() {
+        return stockPrice;
+    }
+
+    public void setStockPrice(double stockPrice) {
+        this.stockPrice = stockPrice;
     }
 }

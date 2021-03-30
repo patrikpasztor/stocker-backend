@@ -1,5 +1,6 @@
 package thesis.stocker.service;
 
+import thesis.stocker.DTO.StockDTO;
 import thesis.stocker.DTO.TransactionDTO;
 import thesis.stocker.DTO.UserDTO;
 import thesis.stocker.model.User;
@@ -23,6 +24,6 @@ public interface IUserService {
 
     Double getStockAmount(String name, String stock);
 
-    Map<String, Double> listOwnedStocks(String user);
+    List<StockDTO> listOwnedStocks(String user);
 
 }

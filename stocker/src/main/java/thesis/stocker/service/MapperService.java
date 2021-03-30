@@ -13,12 +13,6 @@ public class MapperService {
     @Autowired
     IUserService userService;
 
-    public UserDTO userToDto(User user) {
-        UserDTO userDTO = new UserDTO();
-
-        return userDTO;
-    }
-
     public User dtoToUser(UserDTO userDTO) {
         User user = new User();
         user.setName(userDTO.getName());
@@ -27,17 +21,12 @@ public class MapperService {
         return user;
     }
 
-    public TransactionDTO transactionToDto(Transaction transaction) {
-        TransactionDTO transactionDTO = new TransactionDTO();
-
-        return transactionDTO;
-    }
-
     public Transaction dtoToTransaction(TransactionDTO transactionDTO) {
         Transaction transaction = new Transaction();
         transaction.setAmount(transactionDTO.getAmount());
         transaction.setStock(transactionDTO.getStock());
         transaction.setUser(userService.findByName(transactionDTO.getUser()));
+        transaction.setStockPrice(transactionDTO.getStockPrice());
         return transaction;
     }
 }
