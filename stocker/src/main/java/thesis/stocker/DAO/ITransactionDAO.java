@@ -1,7 +1,12 @@
 package thesis.stocker.DAO;
 
 import thesis.stocker.model.Transaction;
+import thesis.stocker.model.User;
+
+import java.util.List;
 
 public interface ITransactionDAO {
-    public boolean save(Transaction transaction) throws Exception;
+    boolean save(Transaction transaction) throws Exception;
+
+    Double getAverageBuyPrice(User user, String stock) throws Exception;
 }

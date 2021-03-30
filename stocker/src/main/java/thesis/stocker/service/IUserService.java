@@ -26,4 +26,6 @@ public interface IUserService {
 
     List<StockDTO> listOwnedStocks(String user);
 
+    Double getAverageBuyPrice(String user, String stock);
+
 }

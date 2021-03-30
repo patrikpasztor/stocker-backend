@@ -2,6 +2,7 @@ package thesis.stocker.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import thesis.stocker.DAO.ITransactionDAO;
 import thesis.stocker.DAO.IUserDAO;
 import thesis.stocker.DTO.StockDTO;
 import thesis.stocker.DTO.TransactionDTO;
@@ -18,6 +19,9 @@ public class UserService  implements IUserService{
 
     @Autowired
     IUserDAO userDAO;
+
+    @Autowired
+    ITransactionDAO transactionDAO;
 
     @Autowired
     MapperService mapperService;
@@ -99,6 +103,17 @@ public class UserService  implements IUserService{
         } catch(NullPointerException e){
             e.printStackTrace();
             return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public Double getAverageBuyPrice(String username, String stock) {
+        try {
+            User user = userDAO.findByName(username);
+            return transactionDAO.getAverageBuyPrice(user, stock);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0d;
         }
     }
 

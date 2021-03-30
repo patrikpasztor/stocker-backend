@@ -67,4 +67,14 @@ public class UserController {
 
     }
 
+    @GetMapping(path="/averageBuyPrice/{user}/{stock}")
+    public ResponseEntity<Double> getAverageBuyPrice(@PathVariable String user, @PathVariable String stock) {
+        try{
+            return new ResponseEntity<>(userService.getAverageBuyPrice(user, stock), HttpStatus.OK) ;
+        } catch(Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+    }
+
 }
