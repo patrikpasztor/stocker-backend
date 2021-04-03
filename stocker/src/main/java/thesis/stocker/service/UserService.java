@@ -72,10 +72,12 @@ public class UserService  implements IUserService{
         Double extraction = transactionDTO.getAmount();
         User toUpdate = findByName(transactionDTO.getUser());
         System.out.println("tole adunk el: " + toUpdate.getName());
-
         Double ownedAmount = getStockAmount(transactionDTO.getUser(), stock);
-        toUpdate.setStockAmount(stock, ownedAmount - extraction);
-
+        Double newAmount = ownedAmount - extraction;
+        if(newAmount.equals(0d))
+            toUpdate.deleteStock(stock);
+        else
+            toUpdate.setStockAmount(stock, newAmount);
         try {
             save(toUpdate);
         } catch (Exception e) {

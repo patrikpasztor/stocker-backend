@@ -1,0 +1,16 @@
+server:
+  port: 9090
+  servlet:
+    context-path: /api
+spring:
+  datasource:
+    password: root
+    url: jdbc:mysql://localhost:3306/stockerdb?serverTimezone=CET
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+  security:
+    user:
+      name: admin
+      password: admin

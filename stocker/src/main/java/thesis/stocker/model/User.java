@@ -62,4 +62,8 @@ public class User {
         this.stockAmountMap.put(stock, newAmount);
     }
 
+    public void deleteStock(String stock) {
+        this.stockAmountMap.remove(stock);
+    }
+
 }
