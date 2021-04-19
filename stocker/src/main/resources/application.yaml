@@ -10,7 +10,17 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-  security:
-    user:
-      name: admin
-      password: admin
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: parasnorik@gmail.com
+    password: pls ne lopd el
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000

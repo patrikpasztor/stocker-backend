@@ -7,10 +7,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO {
-    private String name;
+@NoArgsConstructor
+public class WatchDTO {
     private String email;
-    private String password;
+    private String stock;
 }

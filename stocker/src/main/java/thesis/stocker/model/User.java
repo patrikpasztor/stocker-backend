@@ -1,11 +1,25 @@
 package thesis.stocker.model;
 
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
+@Getter
+@Setter
+@Builder
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue
@@ -13,6 +27,19 @@ public class User {
 
     @Column(nullable = false, length = 100)
     private String name;
+
+    private String email;
+
+    private String password;
+
+    @Builder.Default
+    private Boolean locked = false;
+
+    @Builder.Default
+    private Boolean enabled = false;
+
+    @Builder.Default
+    private UserRole userRole = UserRole.USER;
 
     @Column()
     private double balance;
@@ -24,38 +51,14 @@ public class User {
     @Column(name = "amount")
     private Map<String, Double> stockAmountMap;
 
-    public User() {}
+    @ElementCollection
+    @CollectionTable(name = "user_watchlist_mapping",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")})
+    @Column(name = "stock_name")
+    private List<String> watchlist;
 
     public User(String name) {
         this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
-    public Map<String, Double> getStockAmountMap() {
-        return stockAmountMap;
-    }
-
-    public void setStockAmountMap(Map<String, Double> stockAmountMap) {
-        this.stockAmountMap = stockAmountMap;
     }
 
     public void setStockAmount(String stock, Double newAmount) {
@@ -66,4 +69,40 @@ public class User {
         this.stockAmountMap.remove(stock);
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(userRole.name());
+        return Collections.singletonList(simpleGrantedAuthority);
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !locked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
 }

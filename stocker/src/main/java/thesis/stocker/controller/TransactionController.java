@@ -16,26 +16,24 @@ public class TransactionController {
     private ITransactionService transactionService;
 
     @PostMapping(path = "/buy")
-    public String buy(@RequestBody TransactionDTO transactionDTO) {
+    public boolean buy(@RequestBody TransactionDTO transactionDTO) {
         try {
             System.out.println("vásárlás beérkezés: " + transactionDTO.getUser() + " " + transactionDTO.getStock() + " " + transactionDTO.getAmount() + " " + transactionDTO.getStockPrice());
-            transactionService.buy(transactionDTO);
+            return transactionService.buy(transactionDTO);
         } catch (Exception e) {
             e.printStackTrace();
-            return "error";
+            return false;
         }
-        return "bought";
     }
 
     @PostMapping(path = "/sell")
-    public String sell(@RequestBody TransactionDTO transactionDTO) {
+    public boolean sell(@RequestBody TransactionDTO transactionDTO) {
         try {
-            transactionService.sell(transactionDTO);
+            return transactionService.sell(transactionDTO);
         } catch (Exception e) {
             e.printStackTrace();
-            return "error";
+            return false;
         }
-        return "sold";
     }
 
 }

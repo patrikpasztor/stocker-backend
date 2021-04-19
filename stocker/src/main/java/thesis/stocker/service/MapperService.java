@@ -2,6 +2,7 @@ package thesis.stocker.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import thesis.stocker.DAO.UserDAO;
 import thesis.stocker.DTO.TransactionDTO;
 import thesis.stocker.DTO.UserDTO;
 import thesis.stocker.model.Transaction;
@@ -11,13 +12,13 @@ import thesis.stocker.model.User;
 public class MapperService {
 
     @Autowired
-    IUserService userService;
+    UserDAO userDAO;
 
     public User dtoToUser(UserDTO userDTO) {
         User user = new User();
         user.setName(userDTO.getName());
-        user.setBalance(userDTO.getBalance());
-
+        user.setEmail(userDTO.getEmail());
+        user.setPassword(userDTO.getPassword());
         return user;
     }
 
@@ -25,7 +26,7 @@ public class MapperService {
         Transaction transaction = new Transaction();
         transaction.setAmount(transactionDTO.getAmount());
         transaction.setStock(transactionDTO.getStock());
-        transaction.setUser(userService.findByName(transactionDTO.getUser()));
+        transaction.setUser(userDAO.findByEmail(transactionDTO.getUser()));
         transaction.setStockPrice(transactionDTO.getStockPrice());
         return transaction;
     }
