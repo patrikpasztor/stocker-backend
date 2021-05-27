@@ -187,7 +187,6 @@ public class UserService  implements IUserService, UserDetailsService {
     @Override
     public boolean authenticate(String email, String password) {
         User user = userDAO.findByEmail(email);
-        System.out.println("authenticate: " + password  + " " + user.getPassword());
         return bCryptPasswordEncoder.matches(password, user.getPassword()) && user.getEnabled();
     }
 
